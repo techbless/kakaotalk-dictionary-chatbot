@@ -2,14 +2,14 @@
 
 **Interactive dictionary on Kakaotalk plus friend**
 
-[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]() [![apm](https://img.shields.io/apm/l/vim-mode.svg)]()
+[![Travis](https://img.shields.io/badge/<build>-<unkown>-<lightgrey>.svg)]()
 
 This is a code for kakao plusfriend auto respond server.
 
 [Author]
 
     Chris Yunbin Chang
-    
+
     
 [How to Use]
 
