@@ -1,5 +1,4 @@
 <?php
-
 	include("simple_html_dom.php");
 	
 	$data = json_decode(file_get_contents('php://input'));
