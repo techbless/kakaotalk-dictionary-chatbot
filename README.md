@@ -2,7 +2,7 @@
 
 **Interactive dictionary on Kakaotalk plus friend**
 
-[![Travis](https://img.shields.io/badge/<build>-<unkown>-<lightgrey>.svg)]()
+[![Travis](https://img.shields.io/badge/build-unkown-lightgrey.svg)]()
 
 This is a code for kakao plusfriend auto respond server.
 
