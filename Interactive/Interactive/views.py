@@ -7,6 +7,7 @@ from flask import render_template, request, Flask
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from Interactive import app
+import urllib.parse
 
 @app.route('/keyboard')
 def keyboard():
@@ -18,10 +19,15 @@ def message():
     dataReceive = request.get_json()
 
     usrRequest = str(dataReceive['content'])
-    usrRequest = usrRequest.replace(" ", "%20")
 
-    html = getHTML(usrRequest)
+    realRequest = ""
+    for x in usrRequest.split(' '):
+        realRequest += urllib.parse.quote_plus(x)
+        realRequest += "%20"
+    realRequest = realRequest[:-3]
 
+    html = getHTML(realRequest)
+    print(realRequest)
     message = parseWord(html)
 
     resultMessage = '{ "message" : { "text" : "%s" }}' % message
@@ -43,7 +49,7 @@ def parseWord(html):
 
 def getHTML(wtsearch):
     try:
-        url = u"http://endic.naver.com/search.nhn?sLn=kr&isOnlyViewEE=N&query=" + wtsearch
+        url = "http://endic.naver.com/search.nhn?sLn=kr&isOnlyViewEE=N&query=" + wtsearch
         html = urlopen(url)
     except:
         html = ""
