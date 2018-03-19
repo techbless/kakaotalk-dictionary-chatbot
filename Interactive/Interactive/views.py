@@ -20,14 +20,10 @@ def message():
 
     usrRequest = str(dataReceive['content'])
 
-    realRequest = ""
-    for x in usrRequest.split(' '):
-        realRequest += urllib.parse.quote_plus(x)
-        realRequest += "%20"
-    realRequest = realRequest[:-3]
+    usrRequest = urllib.parse.quote(usrRequest)
 
-    html = getHTML(realRequest)
-    print(realRequest)
+    html = getHTML(usrRequest)
+    print(usrRequest)
     message = parseWord(html)
 
     resultMessage = '{ "message" : { "text" : "%s" }}' % message
