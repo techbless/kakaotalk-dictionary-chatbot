@@ -23,10 +23,10 @@ def message():
     usrRequest = urllib.parse.quote(usrRequest)
 
     html = getHTML(usrRequest)
-    print(usrRequest)
+    #print(usrRequest)
     message = parseWord(html)
 
-    resultMessage = '{ "message" : { "text" : "%s" }}' % message
+    resultMessage = '{ "message" : { "text" "%s" }}' % message
     return resultMessage
 
 def parseWord(html):
