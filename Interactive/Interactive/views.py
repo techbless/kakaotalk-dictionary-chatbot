@@ -26,7 +26,7 @@ def message():
     #print(usrRequest)
     message = parseWord(html)
 
-    resultMessage = '{ "message" : { "text" "%s" }}' % message
+    resultMessage = '{ "message" : { "text" : "%s" }}' % message
     return resultMessage
 
 def parseWord(html):
@@ -36,7 +36,11 @@ def parseWord(html):
         kind = soup.find("span", {"class" : "fnt_k09"}).getText()
         mean = soup.find("span", {"class" : "fnt_k05"}).getText()
 
-        result = kind + " : " + mean
+        if(kind == "" or mean == ""):
+            result = "죄송합니다. 결과를 찾지 못했습니다."
+        else:
+            result = kind + " : " + mean
+
     except:
         result = "죄송합니다. 결과를 찾지 못했습니다."
     
