@@ -8,6 +8,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from Interactive import app
 import urllib.parse
+import datetime
 
 @app.route('/keyboard')
 def keyboard():
@@ -20,13 +21,30 @@ def message():
 
     usrRequest = str(dataReceive['content'])
 
-    usrRequest = urllib.parse.quote(usrRequest)
+    cmd = usrRequest.split(" ", maxsplit = 1)
 
-    html = getHTML(usrRequest)
-    #print(usrRequest)
-    message = parseWord(html)
+    if cmd[0] == "!!오류":
+        try:
+            now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            logMessage = "[" + now + "] " + str(cmd[1]) + "\n"
+            print(logMessage)
+            with open("errlog.log", "w") as log:
+                log.write(logMessage)
+            message = "오류가 제보 되었습니다. 감사합니다."
 
-    resultMessage = '{ "message" : { "text" : "%s" }}' % message
+        except:
+            message = "오ㄹ..ㅠ 제ㅔ.! 보ㅇㅔ'! 싪패 했ㅅ습니다.." #not mistake, intended to be seen glitch.
+        #print(message)
+        resultMessage = '{ "message" : { "text" : "%s" }}' % message
+    else:
+        usrRequest = urllib.parse.quote(usrRequest)
+
+        html = getHTML(usrRequest)
+        print(usrRequest)
+        message = parseWord(html)
+
+        resultMessage = '{ "message" : { "text" : "%s" }}' % message
+
     return resultMessage
 
 def parseWord(html):
@@ -36,7 +54,8 @@ def parseWord(html):
         kind = soup.find("span", {"class" : "fnt_k09"}).getText()
         mean = soup.find("span", {"class" : "fnt_k05"}).getText()
 
-        if(kind == "" or mean == ""):
+
+        if kind == "" or mean == "":
             result = "죄송합니다. 결과를 찾지 못했습니다."
         else:
             result = kind + " : " + mean
