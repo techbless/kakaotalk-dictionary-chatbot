@@ -36,10 +36,6 @@ def message():
             message = "오ㄹ..ㅠ 제ㅔ.! 보ㅇㅔ'! 싪패 했ㅅ습니다.." #not mistake, intended to be seen glitch.
         #print(message)
         resultMessage = '{ "message" : { "text" : "%s" }}' % message
-    elif cmd[0] == "창윤빈":
-        message = "[명사] 세상에서 제일 멋있는 남자" 
-    elif cmd[0] == "권용수":
-        message = "[명사] 세상에서 제일 섹시한 남자"
     else:
         usrRequest = urllib.parse.quote(usrRequest)
 
